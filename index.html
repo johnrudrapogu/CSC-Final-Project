@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Parsing Notes!</title>
+    <style>
+    h1 {
+        color: #063a52;
+        font-family: system-ui;
+        margin-left: 20px;
+        }
+    body {
+        background-position: center;
+        background-size: cover;
+        color: #063a52;
+        height: 1000px;
+        background-color: #ffffff;
+        background-image: linear-gradient(#E4E8F4, #8FA2CA);
+        font-size: 24px;
+        min-height: 100%;
+        }
+    label {
+        color: #0F0F33;
+        font-family: system-ui;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        }
+     button {
+        background-color: #bedaf0;
+        border-color: #0F0F33;
+        color: #e69505;
+        font-family: system-ui;
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 30px;
+        margin-top: 20px;
+        width: 140px;
+        }
+     input {
+        color: #98024c;
+        font-family: system-ui;
+        font-size: 20px;
+        margin-left: 10px;
+        margin-top: 20px;
+        width: 100px;
+        }
+    </style>
+    <script>
+        var callAPI = (value)=>{
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"value":value});
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("https://ld3n80mn4l.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+            .then(response => response.text())
+            .then(result => alert(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Parsing Notes!</h1>
+    <form>
+        <label>Enter Value:</label>
+        <input type="text" id="value">
+        <button type="button" onclick="callAPI(document.getElementById('value').value)">Parse</button>
+    </form>
+</body>
+</html>
